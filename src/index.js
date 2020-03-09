@@ -1,5 +1,5 @@
 const {
-  app, BrowserWindow, Menu, Tray,
+  app, BrowserWindow, Menu, Tray, powerSaveBlocker,
 } = require('electron');
 
 const path = require('path');
@@ -103,3 +103,6 @@ app.on('activate', () => {
 });
 
 app.on('before-quit', () => { isQuiting = true; });
+
+// Запрещаем компьютеру засыпать, пока запущено приложение
+powerSaveBlocker.start('prevent-display-sleep');
