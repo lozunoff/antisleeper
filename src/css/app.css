@@ -1,0 +1,143 @@
+.app {
+  height: 100vh;
+  -webkit-app-region: drag;
+}
+
+.app__container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fafafa;
+  color: #111111;
+  padding: 30px 15px 15px 15px;
+}
+
+.app__header {
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app__body {
+  flex-grow: 0;
+}
+
+.app__footer {
+  flex-grow: 0;
+  text-align: center;
+}
+
+.app__form {
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-app-region: no-drag;
+}
+
+.form__group {
+  display: flex;
+  justify-content: space-between;
+  width: 225px;
+}
+
+.form__checkbox {
+  margin-top: .4rem;
+  cursor: pointer;
+}
+
+.form__checkbox-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 205px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  cursor: pointer;
+}
+
+.title {
+  width: 200px;
+  text-align: center;
+  font-family: Agate, serif;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #B67010;
+  text-shadow: 2px 2px 10px;
+  -webkit-app-region: no-drag;
+}
+
+.title:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.title_red {
+  color: #993734;
+}
+
+.title_black {
+  color: #333333;
+}
+
+.version {
+  font-family: Agate, serif;
+  color: #333333;
+  font-size: 1.2rem;
+  margin-top: -12px;
+  margin-bottom: 0;
+  text-shadow: 2px 2px 10px;
+}
+
+.copyright {
+  color: #86868b;
+  font-family: Agate, serif;
+  font-size: 1.1rem;
+}
+
+.license {
+  color: #86868b;
+  font-family: Agate, serif;
+  font-size: 0.9rem;
+}
+
+.license__link {
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  -webkit-app-region: no-drag;
+}
+
+.license__link:hover {
+  opacity: 0.8;
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #fafafa;
+  -webkit-app-region: no-drag;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:hover {
+  background-color: #e4e4e4;
+}

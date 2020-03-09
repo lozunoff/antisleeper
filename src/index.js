@@ -1,4 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const {
+  app, BrowserWindow, Menu,
+} = require('electron');
+
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -7,36 +10,46 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 }
 
 const createWindow = () => {
-  // Create the browser window.
+  // Создаем главное окно приложения
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 300,
+    height: 250,
+    minWidth: 300,
+    minHeight: 250,
+    maxWidth: 300,
+    maxHeight: 250,
+    resizable: false,
+    maximizable: false,
+    show: false,
+    webPreferences: {
+      nodeIntegration: true,
+      devTools: false,
+    },
+    frame: false,
   });
 
-  // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  // Загружаем в главное окно app.html
+  mainWindow.loadFile(path.join(__dirname, 'html', 'app.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+// Скрываем стандартное меню окна
+Menu.setApplicationMenu(null);
+
+// Приступаем к созданию окна после инициализации приложения
 app.on('ready', createWindow);
 
-// Quit when all windows are closed.
+// Выходим из приложения по закрытию всех окон
 app.on('window-all-closed', () => {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
+// Создаем окно по клику на иконку в панели OS X
 app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }

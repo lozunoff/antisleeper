@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>AntiSleeper</title>
+    <link rel="stylesheet" href="../css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+  </head>
+  <body class="app">
+    <div class="app__container">
+      <div class="app__header">
+        <button id="btnMinimize" class="btn" title="Minimize">&mdash;</button>
+        <h1 id="title" class="title"><span class="title_red">Anti</span><span class="title_black">Sleeper</span></h1>
+        <h2 id="version" class="version">v</h2>
+      </div>
+      <div class="app__body">
+        <form class="app__form form">
+          <div class="form__group">
+            <input type="checkbox" class="form__checkbox" id="autoStartFlag">
+            <label class="form__checkbox-label" for="autoStartFlag">Start app on system startup</label>
+          </div>
+        </form>
+      </div>
+      <div class="app__footer">
+        <div class="copyright">Copyright &copy; 2020 Andrey Lozunov</div>
+        <div class="license">The app released under the <span id='licenseLink' class="license__link">MIT License</span></div>
+      </div>
+    </div>
+  </body>
+</html>
