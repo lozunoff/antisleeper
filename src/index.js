@@ -1,10 +1,13 @@
 const {
-  app, BrowserWindow, Menu,
+  app, BrowserWindow, Menu, Tray,
 } = require('electron');
 
 const path = require('path');
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
+// Флаг для переключения между сворачиванием и полным закрытием
+let isQuiting = false;
+
+// Обрабатываем на Windows события создания/удаления ярлыков при инсталяции/деинсталяции приложения
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
@@ -33,6 +36,50 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  // Добавляем иконку приложения в трей
+  let tray = null;
+  tray = new Tray(path.join(__dirname, 'img', 'icon-tray.png'));
+
+  // Настраиваем пункты меню в трее
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Open',
+      type: 'normal',
+      click: () => mainWindow.show(), // Разворачиваем приложение
+    },
+    {
+      type: 'separator',
+    },
+    {
+      label: 'Exit',
+      type: 'normal',
+      click: () => { // Закрываем приложение
+        isQuiting = true;
+        app.quit();
+      },
+    },
+  ]);
+
+  tray.setToolTip('AntiSleeper');
+  tray.setContextMenu(contextMenu);
+
+  // Сворачиваем/разворачиваем приложение по клику на иконку в трее
+  tray.on('click', () => (mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()));
+
+  // Перехватываем событие сворачивания
+  mainWindow.on('minimize', (e) => {
+    e.preventDefault();
+    mainWindow.hide();
+  });
+
+  // Перехватываем событие закрытия
+  mainWindow.on('close', (e) => {
+    if (!isQuiting) {
+      e.preventDefault();
+      mainWindow.hide();
+    }
+  });
 };
 
 // Скрываем стандартное меню окна
@@ -55,5 +102,4 @@ app.on('activate', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+app.on('before-quit', () => { isQuiting = true; });
