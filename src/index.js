@@ -34,12 +34,10 @@ const createWindow = () => {
   // Загружаем в главное окно app.html
   mainWindow.loadFile(path.join(__dirname, 'html', 'app.html'));
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
-
   // Добавляем иконку приложения в трей
   let tray = null;
-  tray = new Tray(path.join(__dirname, 'img', 'icon-tray.png'));
+  const iconSize = process.platform === 'darwin' ? 'small' : 'big';
+  tray = new Tray(path.join(__dirname, 'img', `icon-tray-${iconSize}.png`));
 
   // Настраиваем пункты меню в трее
   const contextMenu = Menu.buildFromTemplate([
