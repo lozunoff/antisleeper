@@ -94,10 +94,13 @@ app.on('window-all-closed', () => {
   }
 });
 
-// Создаем окно по клику на иконку в панели OS X
+// Создаем/разворачиваем окно по клику на иконку в панели OS X
 app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
+  const windows = BrowserWindow.getAllWindows();
+  if (windows.length === 0) {
     createWindow();
+  } else if (!windows[0].isVisible()) {
+    windows[0].show();
   }
 });
 
