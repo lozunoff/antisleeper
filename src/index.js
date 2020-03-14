@@ -7,6 +7,8 @@ const path = require('path');
 // Флаг для переключения между сворачиванием и полным закрытием
 let isQuiting = false;
 
+let tray = null;
+
 // Обрабатываем на Windows события создания/удаления ярлыков при инсталяции/деинсталяции приложения
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -35,7 +37,6 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'html', 'app.html'));
 
   // Добавляем иконку приложения в трей
-  let tray = null;
   const iconSize = process.platform === 'darwin' ? 'small' : 'big';
   tray = new Tray(path.join(__dirname, 'img', `icon-tray-${iconSize}.png`));
 
